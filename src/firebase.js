@@ -1,9 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { signInWithEmailAndPassword } from "firebase/auth";
-
-
+import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -18,35 +16,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-
-export const register = (email, password) => {
+export const register = (email, password, name, surname, role) => {
     
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-    const user = userCredential.user;
-    console.log(user);
+        updateProfile(auth.currentUser, {displayName: `${name} ${surname}`, photoURL: role})
+        const user = userCredential.user;
+        
     })
     .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
     });
 }
 
-export const singin = (email, password) => {
+export const logout = (email, password) => {
     
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      });
-    
+    signOut(auth).then(() => {
+      console.log('logunt')
+    }).catch((error) => {
+      // An error happened.
+    });
 }

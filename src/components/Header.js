@@ -2,6 +2,7 @@ import '../style/header.css';
 import {SlCalender} from 'react-icons/sl';
 import {AiOutlineClockCircle} from 'react-icons/ai';
 import {HiUserCircle} from 'react-icons/hi';
+import { useSelector } from 'react-redux';
 
 
 
@@ -10,6 +11,7 @@ const Header = () => {
   const current = new Date();
   const date = `${current.getDate()}.${current.getMonth()+1}.${current.getFullYear()}`;
   const clock = `${current.getHours()}.${current.getMinutes()}`;
+  const {user} = useSelector(state => state.auth);
 
   return (
       <header className='smpd-header'>
@@ -20,8 +22,8 @@ const Header = () => {
 
         <div className='smpd-header-user'>
           <div className='smpd-header-user-info'>
-            <h6 className='smpd-header-user-name'>Bedirhan Kara</h6>
-            <h6 className='smpd-header-user-role'> Doktor</h6>
+            <h6 className='smpd-header-user-name'>{user ? user.displayName : 'default@gmail.com' }</h6>
+            <h6 className='smpd-header-user-role'> {user ? user.photoURL : 'default@gmail.com' }</h6>
           </div>
           <div className='smpd-header-user-image'>
             <HiUserCircle className='smpd-header-user-icon' />

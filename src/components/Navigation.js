@@ -5,8 +5,32 @@ import {BsBoxArrowInLeft, BsCalendarPlus} from 'react-icons/bs';
 import {IoIosHome} from 'react-icons/io';
 import {AiFillFolderOpen} from 'react-icons/ai';
 import {TbReportAnalytics} from 'react-icons/tb';
+import { logout } from '../firebase';
+import { logout as handleLogout } from '../stores/auth';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
+
 
 const Navigation = () => {
+    const {user} = useSelector(state => state.auth);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        !user.email && navigate('/login');
+        console.log(user.email)
+    //eslint-disable-next-line
+    },[]);
+
+    const logoutUser = () => {
+        logout();
+        dispatch(handleLogout());
+        navigate('/login');
+    }
+
   return (
     <>
         <div className='smpd-nav-container'>
@@ -27,6 +51,10 @@ const Navigation = () => {
                     <li className='smpd-nav-link'><Link to='/homepage' > <BsCalendarPlus  /> Tedavi Ekle</Link></li>
                 </ul>
             </nav>
+
+            <div className='smpd-logout'>
+                <button onClick={logoutUser}>Logout</button>
+            </div>
         </div>
     </>
 

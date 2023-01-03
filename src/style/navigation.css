@@ -3,7 +3,9 @@
 .smpd-nav-container {
     width: 200px;
     height: 100vh;
-    display: fixed;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
     left: 0;
     top: 0;
     background-color: var(--nav-color);
@@ -75,4 +77,15 @@
 .smpd-nav-link a {
     color: var(--nav-link);
     font-weight: bold;
+}
+
+.smpd-logout {
+    bottom: 20px;
+    margin: 0 auto;
+}
+
+.smpd-logout button{
+    background: none;
+    border: 0;
+    cursor: pointer;
 }

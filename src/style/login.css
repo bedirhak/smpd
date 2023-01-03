@@ -63,11 +63,11 @@
 .smpd-login-container .smpd-login-right {
     background-color: var(--white);
     color: var(--main-color);
-    padding: 80px 75px;
+    padding: 50px 75px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 10px;
 }
 
 .smpd-login-right form {

@@ -46,6 +46,10 @@
     text-align: center;
 }
 
+.smpd-header-user-name, .smpd-header-user-role{
+    text-transform: capitalize;
+}
+
 .smpd-header-user-image svg{
     width: 4em;
     height: 4em;    
