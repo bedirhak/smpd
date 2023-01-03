@@ -1,0 +1,101 @@
+@import './normilize.css';
+
+.smpd-nav-container {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    background-color: var(--nav-color);
+}
+
+.smpd-nav-top {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    background-color: var(--white);
+}
+
+.smpd-nav-logo{
+    height: 75%;
+}
+
+.smpd-nav-logo img{
+    height: 100%;
+}
+
+.smpd-logo-heading{
+    color: var(--main-color);
+    font-weight: 700;
+}
+
+.smpd-nav-close-icon {
+    box-sizing: content-box;
+    font-weight: bold;
+    color: var(--main-color);
+    position: absolute;
+    font-size: 24px;
+    top: calc((100% - 44px) / 2);
+    right: -22px;
+    background-color: white;
+    border: 1px solid var(--white);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: ease 1s;
+}
+
+.smpd-nav-close-icon:hover {
+    border: 1px solid var(--main-color);
+}
+
+.smpd-nav{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smpd-nav ul{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.smpd-nav li a {
+    padding: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.smpd-nav-link a {
+    color: var(--nav-link);
+    font-weight: bold;
+}
+
+.smpd-logout {
+    bottom: 20px;
+    margin: 0 auto;
+}
+
+.smpd-logout button{
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.smpd-clear-window{
+    padding: 100px 0px 0px 200px;
+}

@@ -1,0 +1,31 @@
+@import './normilize.css';
+
+.smpd-treatments-table {
+    width: 100%;
+    padding: 0 20px;
+    border-collapse: collapse;
+}
+
+.smpd-treatments-table th {
+    color: var(--main-color);
+    font-size: 1.2rem;
+    padding: 15px 0;    
+}
+
+th, td, tr, thead, tbody {
+    text-align: center;
+}
+
+th, td {
+    padding: 15px 0;
+}
+
+td {
+    border-top: 1px solid var(--main-color);
+}
+
+tr td:last-of-type {
+    font-size: 24px;
+    color: var(--main-color);
+    cursor: pointer;
+}
