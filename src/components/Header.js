@@ -10,7 +10,7 @@ const Header = () => {
 
   const current = new Date();
   const date = `${current.getDate()}.${current.getMonth()+1}.${current.getFullYear()}`;
-  const clock = `${current.getHours()}.${current.getMinutes()}`;
+  const clock = `${String(current.getHours()).padStart(2, '0')}.${String(current.getMinutes()).padStart(2, '0')}`;
   const {user} = useSelector(state => state.auth);
 
   return (

@@ -21,6 +21,11 @@ a {
     --white: #ffffff;
 }
 
-.smpdp-loged-in{
-    padding: 110px 0 0 210px;
+.smpd-page-heading {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--main-gray);
+    color: var(--main-color);
+    font-size: 1.5em;
+    text-transform: capitalize;
 }
