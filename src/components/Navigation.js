@@ -45,7 +45,7 @@ const Navigation = () => {
             <nav className='smpd-nav'>
                 <ul>
                     <li className='smpd-nav-link'><Link to='/homepage' > <IoIosHome  /> Anasayfa</Link></li>
-                    <li className='smpd-nav-link'><Link to='/homepage' > <TbReportAnalytics  /> Reçeteler</Link></li>
+                    <li className='smpd-nav-link'><Link to='/tedavilerim' > <TbReportAnalytics  /> Tedavilerim</Link></li>
                     <li className='smpd-nav-link'><Link to='/homepage' > <AiFillFolderOpen  /> Raporlar</Link></li>
                     <li className='smpd-nav-link'><Link to='/homepage' > <BsCalendarPlus  /> Tedavi Ekle</Link></li>
                 </ul>
