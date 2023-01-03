@@ -1,8 +1,13 @@
 import React from 'react'
+import Header from '../components/Header';
+import Navigation from '../components/Navigation';
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+      <Header/>
+      <Navigation/>
+    </div>
   )
 }
 
