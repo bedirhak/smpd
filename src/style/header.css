@@ -12,6 +12,7 @@
     height: 100px;
     position: fixed;
     right: 0;
+    top: 0;
 }
 
 .smpd-header-time {
@@ -46,7 +47,11 @@
     text-align: center;
 }
 
-.smpd-header-user-name, .smpd-header-user-role{
+.smpd-header-user-name {
+    text-transform: lowercase;
+}
+
+.smpd-header-user-role{
     text-transform: capitalize;
 }
 

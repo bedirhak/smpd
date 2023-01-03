@@ -17,7 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {user} = useSelector(state => state.auth);
+  const {user} = useSelector(state => state.auth) ;
 
 
   useEffect( () => {
@@ -32,16 +32,12 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const userr = userCredential.user;
-        console.log(userr);
         dispatch(login(userr));
         navigate('/homepage');
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
-        console.log(errorCode);
-        console.log(error)
       });
   }
 

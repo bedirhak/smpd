@@ -35,7 +35,6 @@ export const logout = (email, password) => {
     
     const auth = getAuth();
     signOut(auth).then(() => {
-      console.log('logunt')
     }).catch((error) => {
       // An error happened.
     });

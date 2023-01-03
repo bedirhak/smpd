@@ -22,8 +22,8 @@ const Header = () => {
 
         <div className='smpd-header-user'>
           <div className='smpd-header-user-info'>
-            <h6 className='smpd-header-user-name'>{user ? user.displayName : 'default@gmail.com' }</h6>
-            <h6 className='smpd-header-user-role'> {user ? user.photoURL : 'default@gmail.com' }</h6>
+            <h6 className='smpd-header-user-name'>{user.displayName ? user.email : 'default@gmail.com' }</h6>
+            <h6 className='smpd-header-user-role'> {user.photoURL ? user.photoURL : 'Hasta' }</h6>
           </div>
           <div className='smpd-header-user-image'>
             <HiUserCircle className='smpd-header-user-icon' />

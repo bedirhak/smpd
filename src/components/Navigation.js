@@ -21,7 +21,6 @@ const Navigation = () => {
 
     useEffect(() => {
         !user.email && navigate('/login');
-        console.log(user.email)
     //eslint-disable-next-line
     },[]);
 
