@@ -32,6 +32,7 @@ const Navigation = () => {
 
   return (
     <>
+    { user &&
         <div className='smpd-nav-container'>
             <div className='smpd-nav-top'>
                 <div className='smpd-nav-logo'>
@@ -55,6 +56,7 @@ const Navigation = () => {
                 <button onClick={logoutUser}>Logout</button>
             </div>
         </div>
+    }
     </>
 
 

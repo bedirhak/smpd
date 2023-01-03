@@ -14,6 +14,8 @@ const Header = () => {
   const {user} = useSelector(state => state.auth);
 
   return (
+    <>
+    { user &&
       <header className='smpd-header'>
         <div className='smpd-header-time'>
           <p><SlCalender className='smpd-header-icon' /> <span> {date} </span> </p>
@@ -31,6 +33,9 @@ const Header = () => {
         </div>
                     
       </header>
+
+    }
+    </>
   )
 }
 

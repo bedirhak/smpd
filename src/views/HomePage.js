@@ -1,8 +1,6 @@
 import { useSelector } from 'react-redux';
 import '../style/homepage.css';
 
-
-
 const HomePage = () => {
 
   const {user} = useSelector(state => state.auth);

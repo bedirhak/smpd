@@ -14,6 +14,7 @@ const App = () => {
 
   return (
     <Provider store={store} >
+      
       <Header/>
       <Navigation/>
 
