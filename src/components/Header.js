@@ -31,9 +31,7 @@ const Header = () => {
             <HiUserCircle className='smpd-header-user-icon' />
           </div>
         </div>
-                    
       </header>
-
     }
     </>
   )

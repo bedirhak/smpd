@@ -12,8 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-
-
 const Navigation = () => {
     const {user} = useSelector(state => state.auth);
     const navigate = useNavigate();
@@ -46,9 +44,9 @@ const Navigation = () => {
             <nav className='smpd-nav'>
                 <ul>
                     <li className='smpd-nav-link'><Link to='/homepage' > <IoIosHome  /> Anasayfa</Link></li>
-                    <li className='smpd-nav-link'><Link to='/tedavilerim' > <TbReportAnalytics  /> Tedavilerim</Link></li>
+                    <li className='smpd-nav-link'><Link to='/tedavilerim' > <TbReportAnalytics  /> Hastalarım </Link></li>
                     <li className='smpd-nav-link'><Link to='/homepage' > <AiFillFolderOpen  /> Raporlar</Link></li>
-                    <li className='smpd-nav-link'><Link to='/homepage' > <BsCalendarPlus  /> Tedavi Ekle</Link></li>
+                    <li className='smpd-nav-link'><Link to='/homepage' > <BsCalendarPlus  /> Tedavi Ekle </Link></li>
                 </ul>
             </nav>
 
@@ -58,8 +56,6 @@ const Navigation = () => {
         </div>
     }
     </>
-
-
   );
 }
 
