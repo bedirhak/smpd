@@ -34,12 +34,6 @@ const Patients = () => {
   //eslint-disable-next-line
   }, []); 
 
-  const data = {
-    id: 123,
-    name: 'John',
-    age: 30
-  };
-
   
   return (
     <div className="smpd-clear-window">

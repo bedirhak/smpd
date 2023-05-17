@@ -54,3 +54,5 @@ export const logout = (email, password) => {
       // An error happened.
     });
 }
+
+export default firebase;

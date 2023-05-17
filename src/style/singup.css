@@ -157,3 +157,17 @@
     border-radius: 50%;
     
 }
+
+.smpd-add-treatment-table {
+    padding: 20px;
+}
+
+.smpd-add-treatment-table h4 {
+    margin: 10px 0 5px 0;
+    font-size: 1rem;
+    color: var(--main-color);
+}
+
+.smpd-add-treatment-table .smpd-singup-button {
+    margin-top: 10px;
+}
