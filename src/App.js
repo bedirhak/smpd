@@ -8,6 +8,8 @@ import { store } from './stores/index'
 import { Provider } from 'react-redux'
 import Header from './components/Header';
 import Navigation from './components/Navigation';
+import Patients from './views/Patients';
+import AddTreatment from './views/AddTreatment';
 
 
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
         <Route path='*' element={<Login/>} />
         <Route path='/homepage' element={<HomePage/>} />
         <Route path='/tedavilerim' element={<Treatments />} />
+        <Route path='/add-treatment' element={<AddTreatment />} />
+        <Route path='/patients' element={<Patients />} />
         <Route path='/login' element={<Login/>} />
         <Route path='/sing-up' element={<Singup/>} />
       </Routes>

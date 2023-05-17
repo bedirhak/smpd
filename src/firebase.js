@@ -3,6 +3,12 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { doc } from "firebase/firestore";
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,10 +20,17 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
-const analytics = getAnalytics(firebaseApp);
-export const db = getFirestore(firebaseApp);
+firebase.initializeApp(firebaseConfig);
 
+export const db = firebase.firestore();
+export const doctorCollectionRef = db.collection("doctor-users");
+export const prescriptionsRef = db.collection("prescriptions");
+
+// Firestore bağlantısını kontrol etmek için bir test koleksiyonu oluşturun
+//const testCollection = db.collection("test");
+
+// const analytics = getAnalytics(firebaseApp);
+//export const db = getFirestore(firebaseApp);
 export const register = (email, password, name, surname, role) => {
     
     const auth = getAuth();
@@ -41,5 +54,3 @@ export const logout = (email, password) => {
       // An error happened.
     });
 }
-
-export default firebaseApp;

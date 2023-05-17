@@ -1,23 +1,30 @@
 import '../style/singup.css';
 import logo from '../assets/images/smpd-logo-white.png';
 import logoImages from '../assets/images/smpd-login-image.png';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 import {register} from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { doc, setDoc } from "firebase/firestore"; 
-import {db} from '../firebase';
+import {db, doctorCollectionRef} from '../firebase';
+// import { v4 as uuidv4 } from 'uuid';
+
+
+
 
 const Singup = () => {
   const navigate = useNavigate();
   const {user} = useSelector(state => state.auth);
-
+  // const usersCollection = db.collection("users");
 
   useEffect( () => {
-    user && navigate('/homepage');
+    //user && navigate('/homepage');
+    
+
 
   //eslint-disable-next-line
   }, []); 
+
 
 
   const [email, setEmail] = useState('');
@@ -28,29 +35,30 @@ const Singup = () => {
   const handleSubmit = () => {
     register(email, password,name, surname,role );
 
+   doctorCollectionRef.add({
+      Name: name,
+      Surname: surname,
+      Email: email,
+      Password: password,
+      Role: 'doktor'
+    })
+    .then((docRef) => {
+      console.log('Yeni belge eklendi. Belge kimliği:', docRef.id);
+    })
+    .catch((error) => {
+      console.error('Belge eklenirken hata oluştu:', error);
+    });
 
-    setDoc(doc(db, "doctor-users", "new-doctor"), { // new-doctor kısmı id creator ile id dönecek şekilde yapılacak.
+/*
+    setDoc(doc(db, "doctor-users", uuidv4()), { // new-doctor kısmı id creator ile id dönecek şekilde yapılacak.
       Name: name,
       Surname: surname,
       Email: email,
       Password: password,
       Role: role
     });
-
-    // doctorUserCollection.add({ 
-    //   Email: email,
-    //   Name: name,
-    //   Password: password,
-    //   Role: role,
-    //   Surname: surname
-    // })
-    // .then((docRef) => {
-    //   console.log("Document written with ID: ", docRef.id);
-    // })
-    // .catch((error) => {
-    //   console.error("Error adding document: ", error);
-    // });
-
+*/
+    alert('Doktor Başarıyla Eklendi :)')
     navigate('/login');
   }
 
@@ -74,8 +82,8 @@ const Singup = () => {
               <h4 className='smpd-enterance-heading'>Soyad</h4>
               <input className='smpd-singup-input' type='text' value={surname} onChange={(event) => setSurname(event.target.value)} />
               <h4 className='smpd-enterance-heading'>Role</h4>
-              <input className='smpd-singup-input' type='text' value={role} onChange={(event) => setRole(event.target.value)} />
-              <h4 className='smpd-enterance-heading'>Kullanıcı Adı</h4>
+              <input className='smpd-singup-input' type='text' placeholder='Doktor' disabled value={role} onChange={(event) => setRole(event.target.value)} />
+              <h4 className='smpd-enterance-heading'>Email</h4>
               <input className='smpd-singup-input' type={email} value={email} onChange={(event) => setEmail(event.target.value)} />
               <h4 className='smpd-enterance-heading'>Parola</h4>
               <input className='smpd-singup-input' type='text' value={password} onChange={(event) => setPassword(event.target.value)} />
