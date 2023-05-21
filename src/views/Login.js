@@ -70,9 +70,9 @@ const Login = () => {
               <p>Giriş Yapamıyor Musunus ?</p>
             </div>
 
-            <div className='smpd-login-help'>
+            {/* <div className='smpd-login-help'>
               <Link to='/sing-up' > <FaUserPlus /> Kayıt Ol</Link>
-            </div>
+            </div> */}
 
           </div>
         </div>

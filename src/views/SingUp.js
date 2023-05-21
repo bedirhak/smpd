@@ -14,7 +14,7 @@ import {db, doctorCollectionRef} from '../firebase';
 
 const Singup = () => {
   const navigate = useNavigate();
-  const {user} = useSelector(state => state.auth);
+  //const {user} = useSelector(state => state.auth);
   // const usersCollection = db.collection("users");
 
   useEffect( () => {
@@ -59,7 +59,7 @@ const Singup = () => {
     });
 */
     alert('Doktor Başarıyla Eklendi :)')
-    navigate('/login');
+    //navigate('/login');
   }
 
 
@@ -71,12 +71,12 @@ const Singup = () => {
               <img className='smpd-singup-logo-img' src={logo} alt='Smpd Logo' />
             </div>
             <h1>SMPD</h1>
-            <h2>Hoşgeldiniz</h2>
+            {/* <h2>Hoşgeldiniz</h2> */}
             <img className='smpd-singup-image' src={logoImages} alt='Smpd Logo' />
           </div>
 
           <div className='smpd-singup-right'>
-            <h3 className='smpd-enterance-heading'>Kayıt Ol</h3>
+            <h3 className='smpd-enterance-heading'>Doktor Ekle</h3>
               <h4 className='smpd-enterance-heading'>Ad</h4>
               <input className='smpd-singup-input' type='text' value={name} onChange={(event) => setName(event.target.value)} />
               <h4 className='smpd-enterance-heading'>Soyad</h4>

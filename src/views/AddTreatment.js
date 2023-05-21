@@ -13,11 +13,17 @@ const AddTreatment = (props) => {
     const [user, setUser] = useState(location.state);
 
     useEffect(() => {
+      console.log('user', location.state);
+
         usersCollection
-        .where("PhoneNumber", "==", location.state.PhoneNumber).get()
+        .where("Mail", "==", location.state.Mail).get()
         .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => setUserId(doc.id));
+          querySnapshot.forEach((doc) => {
+            console.log(doc.id)
+            setUserId(doc.id);
+          })
         });
+
     });
   
     const [drugType, setDrugType] = useState('');
@@ -36,7 +42,7 @@ const AddTreatment = (props) => {
       prescriptionsRef.add({
         DrugType: drugType,
         Illness: illness,
-        MadicationHouts: [],
+        MadicationHours: [],
         Name: pillName,
         StartDate: firebase.firestore.Timestamp.fromDate(dateObject),
         TotalPill: totalPill,
@@ -53,17 +59,18 @@ const AddTreatment = (props) => {
     }
 
     const updateUser = (prescriptionId) => {
-        console.log(prescriptionId);
-        const updatedUser = user;
+        
+      const waitingTreatmentList = user.WaitingTreatmentList;
+      waitingTreatmentList.push(prescriptionId);
 
-        updatedUser.NewTreatment = true;
-        updatedUser.TreatmentList.push(prescriptionId);
+      var userRef = db.collection("users").doc(userId);
 
-        console.log('updated useri', updatedUser);
+      userRef.update({
+        WaitingTreatmentList: waitingTreatmentList,
+        NewTreatment: true
+      })
 
-      setDoc(doc(db, "users", 'EGV46oqdWke6zSqhcNZW'), updatedUser);
-
-
+      //setDoc(doc(db, "users", userId), updatedUser);
     }
 
 

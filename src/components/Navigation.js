@@ -18,7 +18,7 @@ const Navigation = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        !user.email && navigate('/login');
+        //!user.email && navigate('/login');
     //eslint-disable-next-line
     },[]);
 

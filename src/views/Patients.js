@@ -53,9 +53,8 @@ const Patients = () => {
                     <td>{patient.Name}</td>
                     <td>{patient.Surname}</td>
                     <td>{patient.Mail}</td>
-                    <td><Link to= '/add-treatment'
-                    state={ patient }>
-                      Tedavi Ekle</Link></td>
+                    <td><Link to= '/add-treatment' state={ patient }>Tedavi Ekle</Link></td>
+                    {console.log('Patient: ',patient)}
                 </tr>
               ))  
             }            
