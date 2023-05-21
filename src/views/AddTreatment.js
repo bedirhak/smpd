@@ -42,7 +42,7 @@ const AddTreatment = (props) => {
       prescriptionsRef.add({
         DrugType: drugType,
         Illness: illness,
-        MadicationHours: [],
+        MedicationHours: [],
         Name: pillName,
         StartDate: firebase.firestore.Timestamp.fromDate(dateObject),
         TotalPill: totalPill,
@@ -88,12 +88,11 @@ const AddTreatment = (props) => {
               <h4 className='smpd-enterance-heading'>Start Date</h4>
               <input className='smpd-singup-input' type='date' value={startDate} onChange={(event) => setStartDate(event.target.value)} />
               <h4 className='smpd-enterance-heading'>Total Pill</h4>
-              <input className='smpd-singup-input' type='number' value={totalPill} onChange={(event) => setTotalPill(event.target.value)} />
+              <input className='smpd-singup-input' type='number' value={totalPill} onChange={(event) => setTotalPill(Number.parseInt(event.target.value))} />
               <h4 className='smpd-enterance-heading'>Usage Period Hour</h4>
-              <input className='smpd-singup-input' type='number' value={usagePediodHour} onChange={(event) => setUsagePeriodHour(event.target.value)} />
+              <input className='smpd-singup-input' type='number' value={usagePediodHour} onChange={(event) => setUsagePeriodHour(Number.parseInt(event.target.value))} />
               <button className='smpd-singup-button' onClick={handleSubmit} type='submit'>Tedavi Ekle </button>
           </div>
-
     </div>
   )
 }
