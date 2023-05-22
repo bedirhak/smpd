@@ -1,0 +1,21 @@
+@import './normilize.css';
+
+.smpd-treatments {
+    width: 100%;
+    margin: 10px;
+
+}
+
+.smpd-treatments-type-heading:not(:first-child)  {
+    border-top: 2px dashed var(--main-color);
+}
+
+.smpd-treatments-type-heading {
+    color: var(--main-color);
+    font-size: 1.5rem;
+    padding-top: 15px;
+}
+
+.smpd-treatments .smpd-treatments-table td:nth-of-type(3) {
+    text-transform: capitalize;
+}
