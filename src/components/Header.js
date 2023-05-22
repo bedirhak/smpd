@@ -24,7 +24,6 @@ const Header = () => {
             handleDoctorSet(doc.id)
           })
         });
-        console.log('giden email', user.email)
   });
 
 

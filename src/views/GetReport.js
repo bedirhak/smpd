@@ -18,7 +18,7 @@ const GetReport = (props) => {
       console.log('user', location.state);
       console.log(isWaitingTreatmentsSet);
 
-      location.state.WaitingTreatmentList.forEach((documentId) => {
+      (location.state.WaitingTreatmentList || []).forEach((documentId) => {
         db.collection('prescriptions').doc(documentId).get()
           .then((doc) => {
             if (doc.exists) {
@@ -47,7 +47,7 @@ const GetReport = (props) => {
       <h1 className='smpd-page-heading'>{user.Name } {user.Surname } Tedavileri </h1>
       
       <div className='smpd-treatments'>
-        {user.TreatmentList.length === 0 && <h4>Kullanıcıya ait kayıtlı tedavi bulunamamıştır. Sağlıklı günler :)</h4>}
+        {(user.TreatmentList ||[]).length === 0 && <h4>Kullanıcıya ait kayıtlı tedavi bulunamamıştır. Sağlıklı günler :)</h4>}
         <div className='smpd-compleated-treatments'>
           {(user.CompletedPrescriptionList || []).length > 0 &&
           <>
@@ -67,7 +67,7 @@ const GetReport = (props) => {
                     <td>{treatment.Name}</td>
                     <td>{treatment.Illness}</td>
                     <td>{treatment.TotalPill}</td>
-                    <td className='smpd-table-buttons'><Link to= '/' state={ treatment }>Tedavi Detayı</Link></td>
+                    <td className='smpd-table-buttons'><Link to= '/treatments-detail' state={ treatment }>Tedavi Detayı</Link></td>
                 </tr>
               ))  
             }            
@@ -76,7 +76,7 @@ const GetReport = (props) => {
           </>
           }
 
-          {user.PrescriptionList.length > 0 &&
+          {(user.PrescriptionList || []).length > 0 &&
           <>
           <h4 className="smpd-treatments-type-heading">Aktif Tedaviler</h4>
           <table className="smpd-treatments-table">
@@ -94,7 +94,7 @@ const GetReport = (props) => {
                     <td>{treatment.Name}</td>
                     <td>{treatment.Illness}</td>
                     <td>{treatment.TotalPill}</td>
-                    <td className='smpd-table-buttons'><Link to= '/get-report' state={ treatment }>Tedavi Detayı</Link></td>
+                    <td className='smpd-table-buttons'><Link to= '/treatments-detail' state={ treatment }>Tedavi Detayı</Link></td>
                 </tr>
               ))  
             }            
@@ -121,7 +121,7 @@ const GetReport = (props) => {
                     <td>{treatment.Name}</td>
                     <td>{treatment.Illness}</td>
                     <td>{treatment.TotalPill}</td>
-                    <td className='smpd-table-buttons'><Link to= '/get-report' state={ treatment }>Tedavi Detayı</Link></td>
+                    <td className='smpd-table-buttons'><Link to= '/treatments-detail' state={ treatment }>Tedavi Detayı</Link></td>
                 </tr>
               ))  
             }            

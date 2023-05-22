@@ -5,7 +5,7 @@ import '../style/addTreatment.css';
 import { useNavigate } from 'react-router-dom';
 import {db, prescriptionsRef} from '../firebase';
 
-const AddTreatment = (props) => {
+const AddTreatment = () => {
     const navigate = useNavigate();
 
     const usagePeriodRef = useRef();

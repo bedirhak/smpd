@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Login from './views/Login';
 import HomePage from './views/HomePage';
-import Treatments from './views/Treatments';
 import './style/normilize.css';
 import Singup from './views/SingUp';
 import { store } from './stores/index'
@@ -11,13 +10,13 @@ import Navigation from './components/Navigation';
 import Patients from './views/Patients';
 import AddTreatment from './views/AddTreatment';
 import GetReport from './views/GetReport';
+import TreatmentsDetail from './views/TreatmentsDetail';
 
 
 const App = () => {
 
   return (
     <Provider store={store} >
-      
       <Header/>
       <Navigation/>
 
@@ -25,7 +24,7 @@ const App = () => {
         <Route path='/' element={<Login/>} />
         <Route path='*' element={<Login/>} />
         <Route path='/homepage' element={<HomePage/>} />
-        <Route path='/tedavilerim' element={<Treatments />} />
+        <Route path='/treatments-detail' element={<TreatmentsDetail />} />
         <Route path='/add-treatment' element={<AddTreatment />} />
         <Route path='/get-report' element={<GetReport />} />
         <Route path='/patients' element={<Patients />} />
