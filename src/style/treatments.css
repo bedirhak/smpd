@@ -23,9 +23,3 @@ th, td {
 td {
     border-top: 1px solid var(--main-color);
 }
-
-tr td:last-of-type {
-    font-size: 24px;
-    color: var(--main-color);
-    cursor: pointer;
-}

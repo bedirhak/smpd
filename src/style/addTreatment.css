@@ -1,0 +1,39 @@
+@import './normilize.css';
+
+.smpd-pill-period-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.smpd-pill-period {
+    width: calc((100% - 25px) / 2);
+}
+
+
+h4.smpd-pill-period-heading {
+    margin: 10px 0 5px 0;
+    font-size: 0.75rem;
+    color: var(--main-color);
+}
+
+.smpd-pill-period-selections {
+    background-color: var(--main-gray);
+    color: var(--nav-link);
+    border: 0;
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    padding-left: 10px;
+}
+
+.smpd-start-date-and-time {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+
+}
+
+.smpd-start-date-and-time > div {
+    width: calc((100% - 25px) / 2);
+}

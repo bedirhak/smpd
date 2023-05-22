@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
+import '../style/patient.css';
 
 
 
@@ -41,10 +42,11 @@ const Patients = () => {
         <div className="smpd-page-center">
           <table className="smpd-treatments-table">
             <thead>
-              <th>Name</th>
-              <th>Surname</th>
+              <th>isim</th>
+              <th>Soyisim</th>
               <th>Mail</th>
               <th>Tedavi Ekle</th>
+              <th>Rapor Al</th>
             </thead>
             <tbody>
             {patients &&
@@ -53,7 +55,8 @@ const Patients = () => {
                     <td>{patient.Name}</td>
                     <td>{patient.Surname}</td>
                     <td>{patient.Mail}</td>
-                    <td><Link to= '/add-treatment' state={ patient }>Tedavi Ekle</Link></td>
+                    <td className='smpd-table-buttons'><Link to= '/add-treatment' state={ patient }>Tedavi Ekle</Link></td>
+                    <td className='smpd-table-buttons'><Link to= '/get-report' state={ patient }>Rapor Al</Link></td>
                     {console.log('Patient: ',patient)}
                 </tr>
               ))  

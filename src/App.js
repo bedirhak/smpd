@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Navigation from './components/Navigation';
 import Patients from './views/Patients';
 import AddTreatment from './views/AddTreatment';
+import GetReport from './views/GetReport';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='/homepage' element={<HomePage/>} />
         <Route path='/tedavilerim' element={<Treatments />} />
         <Route path='/add-treatment' element={<AddTreatment />} />
+        <Route path='/get-report' element={<GetReport />} />
         <Route path='/patients' element={<Patients />} />
         <Route path='/login' element={<Login/>} />
         <Route path='/sing-up' element={<Singup/>} />
