@@ -38,7 +38,7 @@ const Patients = () => {
   
   return (
     <div className="smpd-clear-window">
-        <h1 className='smpd-page-heading'>Treatments</h1>
+        <h1 className='smpd-page-heading'>Hastalar</h1>
         <div className="smpd-page-center">
           <table className="smpd-treatments-table">
             <thead>
@@ -46,7 +46,7 @@ const Patients = () => {
               <th>Soyisim</th>
               <th>Mail</th>
               <th>Tedavi Ekle</th>
-              <th>Rapor Al</th>
+              <th>Tedaviler</th>
             </thead>
             <tbody>
             {patients &&
@@ -56,7 +56,7 @@ const Patients = () => {
                     <td>{patient.Surname}</td>
                     <td>{patient.Mail}</td>
                     <td className='smpd-table-buttons'><Link to= '/add-treatment' state={ patient }>Tedavi Ekle</Link></td>
-                    <td className='smpd-table-buttons'><Link to= '/get-report' state={ patient }>Rapor Al</Link></td>
+                    <td className='smpd-table-buttons'><Link to= '/get-report' state={ patient }>Tedaviler</Link></td>
                     {console.log('Patient: ',patient)}
                 </tr>
               ))  

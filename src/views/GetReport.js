@@ -11,33 +11,45 @@ const GetReport = (props) => {
   
     const [waitingTreatments, setWaitingTreatments] = useState([]);
     const location = useLocation();
-    const usersCollection = db.collection("users");
-    const [userId, setUserId] = useState();
     const [user, setUser] = useState(location.state);
+    const [isWaitingTreatmentsSet, setIsWaitingTreatmentsSet ] = useState(false);
 
     useEffect(() => {
       console.log('user', location.state);
-      const waitingPrescriptions = 
+      console.log(isWaitingTreatmentsSet);
 
-        usersCollection
-        .where("Mail", "==", location.state.Mail).get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            console.log(doc.id)
-            setUserId(doc.id);
+      location.state.WaitingTreatmentList.forEach((documentId) => {
+        db.collection('prescriptions').doc(documentId).get()
+          .then((doc) => {
+            if (doc.exists) {
+              // Belge mevcutsa, belge verilerine erişebilirsiniz
+              const data = doc.data();
+              const newArray = [...waitingTreatments];
+
+              // Yeni veriyi kopyaya ekle
+              !(newArray.includes(data)) && newArray.push(data);
+              setWaitingTreatments(newArray);
+
+              } else {
+              // Belge mevcut değilse
+              console.log('Belge bulunamadı!');
+            }
           })
-        });
-
-    });
-
+          .catch((error) => {
+            console.log('Belge çekme hatası:', error);
+          });
+          
+      });
+    }, []);
 
   return (
     <div className="smpd-clear-window">
-      <h1 className='smpd-page-heading'>{user.Name } {user.Surname } Tedavi Raporu </h1>
+      <h1 className='smpd-page-heading'>{user.Name } {user.Surname } Tedavileri </h1>
       
       <div className='smpd-treatments'>
+        {user.TreatmentList.length === 0 && <h4>Kullanıcıya ait kayıtlı tedavi bulunamamıştır. Sağlıklı günler :)</h4>}
         <div className='smpd-compleated-treatments'>
-          {user.CompletedPrescriptionList.length > 0 &&
+          {(user.CompletedPrescriptionList || []).length > 0 &&
           <>
           <h4 className="smpd-treatments-type-heading">Tamamlanan Tedaviler</h4>
           <table className="smpd-treatments-table">
@@ -55,7 +67,7 @@ const GetReport = (props) => {
                     <td>{treatment.Name}</td>
                     <td>{treatment.Illness}</td>
                     <td>{treatment.TotalPill}</td>
-                    <td className='smpd-table-buttons'><Link to= '/get-report' state={ treatment }>Tedavi Detayı</Link></td>
+                    <td className='smpd-table-buttons'><Link to= '/' state={ treatment }>Tedavi Detayı</Link></td>
                 </tr>
               ))  
             }            
@@ -72,7 +84,7 @@ const GetReport = (props) => {
               <th>İlaç Tipi</th>
               <th>İlaç Adı</th>
               <th>Şikayet</th>
-              <th>Kullanılan İlaç Adedi</th>
+              <th>Kullanılacak İlaç Adedi</th>
               <th>Tedavi Detayı</th>
             </thead>
             <tbody>
@@ -91,7 +103,7 @@ const GetReport = (props) => {
           </>
           } 
 
-          {user.WaitingTreatmentList.length > 0 &&
+          {waitingTreatments.length > 0 &&
           <>
           <h4 className="smpd-treatments-type-heading">Onay Bekleyen Tedaviler</h4>
           <table className="smpd-treatments-table">
@@ -99,17 +111,17 @@ const GetReport = (props) => {
               <th>İlaç Tipi</th>
               <th>İlaç Adı</th>
               <th>Şikayet</th>
-              <th>Kullanılan İlaç Adedi</th>
+              <th>Kullanılacak İlaç Adedi</th>
               <th>Tedavi Detayı</th>
             </thead>
             <tbody>
-            {user && user.WaitingTreatmentList.map((treatment, index) => (
+            {waitingTreatments.map((treatment, index) => (
                 <tr key={index}>
                     <td>{treatment.DrugType}</td>
                     <td>{treatment.Name}</td>
                     <td>{treatment.Illness}</td>
                     <td>{treatment.TotalPill}</td>
-                    <td className='smpd-table-buttons'><Link to= '/get-report' state={ treatment }>Rapor Al</Link></td>
+                    <td className='smpd-table-buttons'><Link to= '/get-report' state={ treatment }>Tedavi Detayı</Link></td>
                 </tr>
               ))  
             }            

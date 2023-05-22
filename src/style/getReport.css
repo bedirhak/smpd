@@ -11,7 +11,7 @@
 }
 
 .smpd-treatments-type-heading {
-    color: var(--main-color);
+    color: var(--nav-link);
     font-size: 1.5rem;
     padding-top: 15px;
 }

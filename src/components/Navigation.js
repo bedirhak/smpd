@@ -9,24 +9,54 @@ import { logout } from '../firebase';
 import { logout as handleLogout } from '../stores/auth';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import {db} from '../firebase';
+
 
 const Navigation = () => {
     const {user} = useSelector(state => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        //!user.email && navigate('/login');
-    //eslint-disable-next-line
-    },[]);
+    const doctorCollectionRef = db.collection("doctor-users");
 
     const logoutUser = () => {
         logout();
         dispatch(handleLogout());
         navigate('/login');
     }
+
+    const [doctor, setDoctor] = useState({});
+  
+    useEffect(() => {
+        user &&
+      doctorCollectionRef
+          .where("Email", "==", user.email).get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              handleDoctorSet(doc.id)
+            })
+          });
+    });
+
+  
+    const handleDoctorSet = (doctorId) => {
+  
+      db.collection('doctor-users').doc(doctorId).get()
+      .then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          setDoctor(data);
+          } else {
+          // Belge mevcut değilse
+          console.log('Belge bulunamadı!');
+        }
+      })
+      .catch((error) => {
+        console.log('Belge çekme hatası:', error);
+      });
+    };
+    
 
   return (
     <>
@@ -43,11 +73,12 @@ const Navigation = () => {
             </div>
             <nav className='smpd-nav'>
                 <ul>
-                    <li className='smpd-nav-link'><Link to='/homepage' > <IoIosHome  /> Anasayfa</Link></li>
-                    <li className='smpd-nav-link'><Link to='/patients' > <TbReportAnalytics  /> Hastalarım </Link></li>
-                    {/* <li className='smpd-nav-link'><Link to='/homepage' > <AiFillFolderOpen  /> Raporlar</Link></li> */}
-                    {/* <li className='smpd-nav-link'><Link to='/homepage' > <BsCalendarPlus  /> Tedavi Ekle </Link></li> */}
-                    <li className='smpd-nav-link'><Link to='/sing-up' > <BsCalendarPlus  /> Doktor Ekle </Link></li>
+                    {doctor.Role === 'doktor' && 
+                    <>
+                        <li className='smpd-nav-link'><Link to='/homepage' > <IoIosHome  /> Anasayfa</Link></li>
+                        <li className='smpd-nav-link'><Link to='/patients' > <TbReportAnalytics  /> Hastalarım </Link></li>
+                    </>}
+                    {doctor.Role === 'admin' && <li className='smpd-nav-link'><Link to='/sing-up' > <BsCalendarPlus  /> Doktor Ekle </Link></li>}
                 </ul>
             </nav>
 
