@@ -7,15 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { doc, setDoc } from "firebase/firestore"; 
 import {db, doctorCollectionRef} from '../firebase';
-// import { v4 as uuidv4 } from 'uuid';
-
-
-
 
 const Singup = () => {
   const navigate = useNavigate();
-  //const {user} = useSelector(state => state.auth);
-  // const usersCollection = db.collection("users");
 
   useEffect( () => {
     //user && navigate('/homepage');
@@ -24,8 +18,6 @@ const Singup = () => {
 
   //eslint-disable-next-line
   }, []); 
-
-
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,25 +33,13 @@ const Singup = () => {
       Email: email,
       Password: password,
       Role: 'doktor'
-    })
-    .then((docRef) => {
-      console.log('Yeni belge eklendi. Belge kimliği:', docRef.id);
-    })
-    .catch((error) => {
+    }).then((docRef) => {
+      //console.log('Yeni belge eklendi. Belge kimliği:', docRef.id);
+    }).catch((error) => {
       console.error('Belge eklenirken hata oluştu:', error);
     });
 
-/*
-    setDoc(doc(db, "doctor-users", uuidv4()), { // new-doctor kısmı id creator ile id dönecek şekilde yapılacak.
-      Name: name,
-      Surname: surname,
-      Email: email,
-      Password: password,
-      Role: role
-    });
-*/
-    alert('Doktor Başarıyla Eklendi :)')
-    //navigate('/login');
+    alert('Doktor Başarıyla Eklendi :)');
   }
 
 
@@ -74,7 +54,6 @@ const Singup = () => {
             {/* <h2>Hoşgeldiniz</h2> */}
             <img className='smpd-singup-image' src={logoImages} alt='Smpd Logo' />
           </div>
-
           <div className='smpd-singup-right'>
             <h3 className='smpd-enterance-heading'>Doktor Ekle</h3>
               <h4 className='smpd-enterance-heading'>Ad</h4>

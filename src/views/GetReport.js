@@ -1,8 +1,6 @@
-
+import '../style/getReport.css';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import firebase from 'firebase/compat/app';
-import '../style/getReport.css';
 import {db, prescriptionsRef} from '../firebase';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +10,6 @@ const GetReport = (props) => {
     const [waitingTreatments, setWaitingTreatments] = useState([]);
     const location = useLocation();
     const [user, setUser] = useState(location.state);
-    const [isWaitingTreatmentsSet, setIsWaitingTreatmentsSet ] = useState(false);
 
     useEffect(() => {
       (location.state.WaitingTreatmentList || []).forEach((documentId) => {

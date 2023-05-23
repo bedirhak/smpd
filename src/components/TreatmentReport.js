@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { Document, Page, Text, View } from '@react-pdf/renderer';
+import useDateCalc from '../hooks/useDateCalc';
 
 const styles = {
     body: {
         padding: '20px',
         display: 'inline-block',
+        maxWidth: '100%'
     },
   container: {
     display: 'block',
@@ -23,7 +25,7 @@ const styles = {
   infoTextLeft: {
     color: '#60c1ca',
     marginRight: '50px',
-    width: '150px'
+    width: '200px'
   },
   infoTextRight: {
     color: 'black',
@@ -38,9 +40,10 @@ const styles = {
   },
   infoContainer: {
     display: 'block',
-    width: '100vw'
+    width: '100%'
   }
 };
+
 
 const TreatmentReport = ({ details, treatmentType, patient }) => {
   console.log('Treatment Details:', details);
@@ -132,6 +135,12 @@ const TreatmentReport = ({ details, treatmentType, patient }) => {
             </View>
             <View style={styles.infoContainer}>
                 <View style={styles.info}>
+                    <Text style={styles.infoTextLeft}>Tedavi Başlama Tarihi: </Text>
+                    <Text style={styles.infoTextMail}> {useDateCalc(details.StartDate.seconds, details.StartDate.nanoseconds)}</Text>
+                </View>
+            </View>
+            <View style={styles.infoContainer}>
+                <View style={styles.info}>
                     <Text style={styles.infoTextLeft}>İlaç Tipi: </Text>
                     <Text style={styles.infoTextRight}> {details.DrugType}</Text>
                 </View>
@@ -157,7 +166,7 @@ const TreatmentReport = ({ details, treatmentType, patient }) => {
             <View style={styles.infoContainer}>
                 <View style={styles.info}>
                     <Text style={styles.infoTextLeft}>Kullanılan İlaç Adedi: </Text>
-                    <Text style={styles.infoTextMail}> {details.TotalPill}</Text>
+                    <Text style={styles.infoTextMail}> {details.UsagePeriod.filter(obj => obj.Taken).length}</Text>
                 </View>
             </View>
            
