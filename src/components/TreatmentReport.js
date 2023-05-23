@@ -156,7 +156,7 @@ const TreatmentReport = ({ details, treatmentType, patient }) => {
             </View>
             <View style={styles.infoContainer}>
                 <View style={styles.info}>
-                    <Text style={styles.infoTextLeft}>İlaç Adedi: </Text>
+                    <Text style={styles.infoTextLeft}>Kullanılan İlaç Adedi: </Text>
                     <Text style={styles.infoTextMail}> {details.TotalPill}</Text>
                 </View>
             </View>

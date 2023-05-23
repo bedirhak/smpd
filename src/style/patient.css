@@ -25,3 +25,18 @@
 .smpd-treatments-table td:nth-of-type(3) {
     text-transform: none;
 }
+
+.smpd-page-center {
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.smpd-page-center::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.smpd-page-center::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+    border-radius: 10px;
+}

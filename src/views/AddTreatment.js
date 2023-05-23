@@ -30,15 +30,13 @@ const AddTreatment = () => {
             setUserId(doc.id);
           })
         });
-
     });
 
     const setUsagePeriodType = (usagePeriod) => {
-      setUsagePeriodHour(usagePeriod);
+      setUsagePeriodHour(Number.parseInt(usagePeriod));
       const selectElement = document.getElementById("smpd-medication-hours");
       selectElement.selectedIndex = 0;
       setMedicationHours([]);
-
     }
 
     const setMedicationHoursType = (usageHours) => {
@@ -46,7 +44,7 @@ const AddTreatment = () => {
       const medicationHoursIntArray = medicationHoursStringArray.map((str) => {
         return parseInt(str, 10);
       });
-      setUsagePeriodHour(null);
+      setUsagePeriodHour('');
       setMedicationHours(medicationHoursIntArray);
     }
 
