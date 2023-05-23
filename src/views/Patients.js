@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 import '../style/patient.css';
 
 
-
-
 const Patients = () => {
   const usersCollection = db.collection("users");
   const [patients, setPatients] = useState([]);
@@ -18,19 +16,10 @@ const Patients = () => {
     
     
     usersCollection
-      .where("Role", "==", 'patient')
-      .get()
-      .then((querySnapshot) => {
-        console.log(querySnapshot);
-        querySnapshot.forEach((doc) => {
-          console.log(doc.data());
-        });
-
-        const myArray = querySnapshot.docs.map((doc) => doc.data());
-        setPatients(myArray);
-        console.log(patients);
-
-      });
+    .where("Role", "==", 'patient').get().then((querySnapshot) => {
+      const myArray = querySnapshot.docs.map((doc) => doc.data());
+      setPatients(myArray);
+    });
 
   //eslint-disable-next-line
   }, []); 
@@ -57,7 +46,6 @@ const Patients = () => {
                     <td>{patient.Mail}</td>
                     <td className='smpd-table-buttons'><Link to= '/add-treatment' state={ patient }>Tedavi Ekle</Link></td>
                     <td className='smpd-table-buttons'><Link to= '/get-report' state={ patient }>Tedaviler</Link></td>
-                    {console.log('Patient: ',patient)}
                 </tr>
               ))  
             }            
@@ -65,8 +53,6 @@ const Patients = () => {
           </table>
         </div>
     </div>
-
-
   )
 }
 

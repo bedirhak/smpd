@@ -86,7 +86,6 @@ const AddTreatment = () => {
       userRef.update({
         WaitingTreatmentList: waitingTreatmentList,
         NewTreatment: true,
-        MedicationHours: medicationHours
       }).then(() => {
         alert('Tedavi Başarıyla Eklendi');
         navigate('/patients');
@@ -130,9 +129,9 @@ const AddTreatment = () => {
             <h4 className='smpd-pill-period-heading'>Kullanım Sıklığı Ne Olmalı ?</h4>
             <select className="smpd-pill-period-selections" id="smpd-medication-hours" onChange={(event) => setMedicationHoursType(event.target.value)} >
               <option selected disabled hidden>Kullanım Sıklığı Seçiniz</option>
-              <option value="12,24">Sabah-Akşam</option>
+              <option value="8,18">Sabah-Akşam</option>
               <option value="12">Günde 1 Kez</option>
-              <option value="12,18,24">Sabah-Öğlen-Akşam</option>
+              <option value="8,12,18">Sabah-Öğlen-Akşam</option>
             </select>
           </div>
         </div>
