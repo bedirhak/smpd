@@ -37,3 +37,44 @@ h4.smpd-pill-period-heading {
 .smpd-start-date-and-time > div {
     width: calc((100% - 25px) / 2);
 }
+
+/* Modal overlay */
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay arkaplan rengi */
+} 
+  
+  /* Modal penceresi */
+.ReactModal__Content {
+    top: calc(50% - 100px) !important;
+    background-color: white;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    max-width: 500px;  
+    height: 200px; 
+    margin: 0 auto; 
+    padding: 20px;  
+    text-align: center;
+}
+
+.smpd-modal-heading {
+    color: var(--main-color);
+}
+
+.smpd-modal-button{
+    background-color: var(--main-color);
+    border-radius: 5px;
+    padding: 5px 30px;
+    border: 1px solid var(--main-color);
+    color: white;
+    font-size: 1rem;
+    position: absolute;
+    bottom: 20px;
+    left: 40%;
+    cursor: pointer;
+    transition: 500ms all ease;
+}
+
+.smpd-modal-button:hover{
+    color: var(--main-color);
+    background-color: white;
+}

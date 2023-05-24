@@ -4,11 +4,14 @@ import firebase from 'firebase/compat/app';
 import '../style/addTreatment.css';
 import { useNavigate } from 'react-router-dom';
 import {db, prescriptionsRef} from '../firebase';
+import Modal from 'react-modal';
+
 
 const AddTreatment = () => {
     const navigate = useNavigate();
 
     const usagePeriodRef = useRef();
+    const pillNameRef = useRef();
     const [drugType, setDrugType] = useState('');
     const [illness, setIllness] = useState('');
     const [pillName, setPillName] = useState('');
@@ -19,8 +22,11 @@ const AddTreatment = () => {
     const [medicationHours, setMedicationHours] = useState([]);
     const location = useLocation();
     const usersCollection = db.collection("users");
+    const pillNamesRef = db.collection("ready-pills");
     const [userId, setUserId] = useState();
     const [user, setUser] = useState(location.state);
+    const [pillList, setPillList] = useState([]);
+
 
     useEffect(() => {
         usersCollection
@@ -29,6 +35,19 @@ const AddTreatment = () => {
           querySnapshot.forEach((doc) => {
             setUserId(doc.id);
           })
+        });
+
+        pillNamesRef.get()
+        .then(function(querySnapshot) {
+          const dataList = [];
+          querySnapshot.forEach(function(doc) {
+            // Her belge için verilere erişebilirsiniz
+            dataList.push(doc.data());
+          });
+          setPillList(dataList);
+        })
+        .catch(function(error) {
+          console.log("Verileri alma işlemi başarısız: ", error);
         });
     });
 
@@ -70,6 +89,7 @@ const AddTreatment = () => {
         UsagePeriod: [],
         UsagePeriodHour: usagePediodHour
       }).then((docRef) => {
+        console.log(docRef.id);
         updateUser(docRef.id);
       }).catch((error) => {
         console.error('Belge eklenirken hata oluştu:', error);
@@ -77,6 +97,14 @@ const AddTreatment = () => {
     }
 
     const updateUser = (prescriptionId) => {
+      usersCollection
+        .where("Mail", "==", location.state.Mail).get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            setUser(doc.data());
+          })
+        });
+
       const userRef = db.collection("users").doc(userId);
       const waitingTreatmentList = user.WaitingTreatmentList;
       waitingTreatmentList.push(prescriptionId);
@@ -85,10 +113,28 @@ const AddTreatment = () => {
         WaitingTreatmentList: waitingTreatmentList,
         NewTreatment: true,
       }).then(() => {
-        alert('Tedavi Başarıyla Eklendi');
-        navigate('/patients');
+        setModalIsOpen(true);
       });
+
     }
+
+    const setNameOfPill = (pillNameInput) => {
+      setPillName(pillNameInput)
+      const selectElement = document.getElementById("smpd-pill-name");
+      selectElement.selectedIndex = 0;
+    }
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => {
+      setModalIsOpen(true);
+    };
+  
+    const closeModal = () => {
+      setModalIsOpen(false);
+      navigate('/patients');
+    };
+
 
   return (
     <div className="smpd-clear-window">
@@ -100,8 +146,22 @@ const AddTreatment = () => {
         <h4 className='smpd-enterance-heading'>Hastalık</h4>
         <input className='smpd-singup-input' type='text' value={illness} onChange={(event) => setIllness(event.target.value)} />
 
-        <h4 className='smpd-enterance-heading'>İlaç Adı</h4>
-        <input className='smpd-singup-input' type='text' value={pillName} onChange={(event) => setPillName(event.target.value)} />
+        <h4 className='smpd-enterance-heading'>İlaç Adı (Kullanım Tiplerinden Birini Seçiniz)</h4>
+        <div className='smpd-pill-period-container'>
+          <div className='smpd-pill-period'>
+          <h4 className='smpd-enterance-heading'>İlaç Adı</h4>
+          <input ref={pillNameRef} className='smpd-singup-input' type='text' value={pillName} onChange={(event) => setNameOfPill(event.target.value)} />
+          </div>
+          <div className='smpd-pill-period'>
+            <h4 className='smpd-pill-period-heading'>Kullanım Sıklığı Ne Olmalı ?</h4>
+            <select className="smpd-pill-period-selections" id="smpd-pill-name" onChange={(event) => setPillName(event.target.value)} >
+              <option selected disabled hidden>Bir İlaç Adı Seçiniz</option>
+              {pillList.map((data, index) => (
+                <option  key={index} value={data.Name} >{data.Name}</option>
+              ))}
+            </select>
+          </div>
+        </div>
 
         <div className='smpd-start-date-and-time'>
           <div className='smpd-start-date'>
@@ -136,6 +196,12 @@ const AddTreatment = () => {
 
         <button className='smpd-singup-button' onClick={handleSubmit} type='submit'>Tedavi Ekle </button>
       </div>
+
+
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+        <h2 className='smpd-modal-heading'>Tedavi Başarıyla Eklendi</h2>
+        <button className='smpd-modal-button' onClick={closeModal}>Kapat</button>
+      </Modal>
     </div>
   )
 }

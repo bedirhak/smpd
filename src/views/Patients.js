@@ -1,6 +1,5 @@
 import '../style/treatments.css';
 import { useEffect, useState } from 'react';
-import { RiDeleteBinLine } from 'react-icons/ri';
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
 import '../style/patient.css';
