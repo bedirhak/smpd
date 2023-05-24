@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../stores/auth';
 import { useSelector } from 'react-redux';
+import Modal from 'react-modal';
 
 
 
@@ -18,7 +19,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {user} = useSelector(state => state.auth) ;
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalText, setModalText] = useState({});
 
   useEffect( () => {
 
@@ -38,8 +40,36 @@ const Login = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(error.message);
+        if (error.message == 'Firebase: Error (auth/wrong-password).') {
+          setModalText({
+            heading: 'Hatalı Parola Girdiniz!',
+            text: '',
+          })
+          setModalIsOpen(true);
+        } else if (error.message == 'Firebase: Error (auth/user-not-found).') {
+          setModalText({
+            heading: 'Kullanıcı Bulunamadı !',
+            text: '',
+          })
+          setModalIsOpen(true);
+        }  else if (error.message.includes('(auth/too-many-requests)')) {
+          setModalText({
+            heading: 'Fazla Hatalı Giriş Denemesi !',
+            text: 'Hesabınızda siz ya da başkası tarafından çok fazla kez hatalı giriş denemesi gerçekleştirildi. Hesabınızı geçici süreli olarak beklemeye aldık. Biraz bekledikten sonra tekrardan giriş yapabilirsiniz. Sağlıklı Günler :)',
+          })
+          setModalIsOpen(true);
+        }
       });
   }
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
 
   return (
@@ -62,13 +92,13 @@ const Login = () => {
             <h4 className='smpd-enterance-heading'>E - Mail</h4>
             <input className='smpd-login-input' type={email} value={email} onChange={(event) => setEmail(event.target.value)} />
             <h4 className='smpd-enterance-heading'>Parola</h4>
-            <input className='smpd-login-input' type='text' value={password} onChange={(event) => setPassword(event.target.value)} />
+            <input className='smpd-login-input' type='password' value={password} onChange={(event) => setPassword(event.target.value)} />
             <button onClick={handleLogin} className='smpd-login-button' type='submit'>Giriş Yap </button>
 
-            <div className='smpd-login-help'>
+            {/* <div className='smpd-login-help'>
               <div className='smpd-login-question-mark'>?</div>
               <p>Giriş Yapamıyor Musunus ?</p>
-            </div>
+            </div> */}
 
             {/* <div className='smpd-login-help'>
               <Link to='/sing-up' > <FaUserPlus /> Kayıt Ol</Link>
@@ -76,6 +106,11 @@ const Login = () => {
 
           </div>
         </div>
+        <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+        <h2 className='smpd-modal-heading'>{modalText.heading}</h2>
+        <p>{modalText.text}</p>
+        <button className='smpd-modal-button' onClick={closeModal}>Kapat</button>
+      </Modal>
       </div>
 
   )

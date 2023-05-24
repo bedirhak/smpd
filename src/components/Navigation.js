@@ -73,12 +73,16 @@ const Navigation = () => {
             </div>
             <nav className='smpd-nav'>
                 <ul>
+                  <li className='smpd-nav-link'><Link to='/homepage' > <IoIosHome  /> Anasayfa</Link></li>
                     {doctor.Role === 'doktor' && 
                     <>
-                        <li className='smpd-nav-link'><Link to='/homepage' > <IoIosHome  /> Anasayfa</Link></li>
                         <li className='smpd-nav-link'><Link to='/patients' > <TbReportAnalytics  /> Hastalarım </Link></li>
                     </>}
-                    {doctor.Role === 'admin' && <li className='smpd-nav-link'><Link to='/sing-up' > <BsCalendarPlus  /> Doktor Ekle </Link></li>}
+                    {doctor.Role === 'admin' && 
+                    <>
+                        <li className='smpd-nav-link'><Link to='/sing-up' > <BsCalendarPlus  /> Doktor Ekle </Link></li>
+                        <li className='smpd-nav-link'><Link to='/add-treatment-details' > <TbReportAnalytics  /> İlaç Ekle </Link></li>
+                    </>}
                 </ul>
             </nav>
 

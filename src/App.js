@@ -11,6 +11,7 @@ import Patients from './views/Patients';
 import AddTreatment from './views/AddTreatment';
 import GetReport from './views/GetReport';
 import TreatmentsDetail from './views/TreatmentsDetail';
+import AddTreatmentDetails from './views/AddTreatmentDetails';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='/homepage' element={<HomePage/>} />
         <Route path='/treatments-detail' element={<TreatmentsDetail />} />
         <Route path='/add-treatment' element={<AddTreatment />} />
+        <Route path='/add-treatment-details' element={<AddTreatmentDetails />} />
         <Route path='/get-report' element={<GetReport />} />
         <Route path='/patients' element={<Patients />} />
         <Route path='/login' element={<Login/>} />
