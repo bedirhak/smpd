@@ -59,7 +59,16 @@ const Login = () => {
             text: 'Hesabınızda siz ya da başkası tarafından çok fazla kez hatalı giriş denemesi gerçekleştirildi. Hesabınızı geçici süreli olarak beklemeye aldık. Biraz bekledikten sonra tekrardan giriş yapabilirsiniz. Sağlıklı Günler :)',
           })
           setModalIsOpen(true);
+        }  else if (error.message.includes('(auth/invalid-email).')) {
+          setModalText({
+            heading: 'Hatalı Email !',
+            text: 'Girmiş olduğunuz email verisi hatalı. Lütfen geçerli bir email giriniz.',
+          })
+          setModalIsOpen(true);
         }
+
+
+        
       });
   }
 
