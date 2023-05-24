@@ -55,7 +55,7 @@ const AddTreatment = () => {
       setUsagePeriodHour(Number.parseInt(usagePeriod));
       const selectElement = document.getElementById("smpd-medication-hours");
       selectElement.selectedIndex = 0;
-      setMedicationHours([]);
+      setMedicationHours(null);
     }
 
     const setMedicationHoursType = (usageHours) => {
@@ -63,7 +63,7 @@ const AddTreatment = () => {
       const medicationHoursIntArray = medicationHoursStringArray.map((str) => {
         return parseInt(str, 10);
       });
-      setUsagePeriodHour('');
+      setUsagePeriodHour(null);
       setMedicationHours(medicationHoursIntArray);
     }
 
@@ -102,19 +102,23 @@ const AddTreatment = () => {
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             setUser(doc.data());
+
+            const userRef = db.collection("users").doc(userId);
+            const waitingTreatmentList = doc.data().WaitingTreatmentList;
+            waitingTreatmentList.push(prescriptionId);
+            console.log('Waiting Treatment: ',waitingTreatmentList);
+
+            userRef.update({
+              WaitingTreatmentList: waitingTreatmentList,
+              NewTreatment: true,
+            }).then(() => {
+              setModalIsOpen(true);
+            });
+
           })
         });
 
-      const userRef = db.collection("users").doc(userId);
-      const waitingTreatmentList = user.WaitingTreatmentList;
-      waitingTreatmentList.push(prescriptionId);
-
-      userRef.update({
-        WaitingTreatmentList: waitingTreatmentList,
-        NewTreatment: true,
-      }).then(() => {
-        setModalIsOpen(true);
-      });
+      
 
     }
 
