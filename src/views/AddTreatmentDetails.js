@@ -77,7 +77,7 @@ const AddTreatmentDetails = () => {
         <input className='smpd-singup-input' type='text' value={pillName} onChange={(event) => setPillName(event.target.value)} />
 
 
-        <button className='smpd-singup-button' onClick={handleSubmit} type='submit'>Tedavi Ekle </button>
+        <button className='smpd-singup-button' onClick={handleSubmit} type='submit'>Listeye İlaç Ekle </button>
       </div>
 
 

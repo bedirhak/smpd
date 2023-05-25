@@ -26,6 +26,7 @@ const AddTreatment = () => {
     const [userId, setUserId] = useState();
     const [user, setUser] = useState(location.state);
     const [pillList, setPillList] = useState([]);
+    const [modalText, setModalText] = useState({});
 
 
     useEffect(() => {
@@ -76,24 +77,35 @@ const AddTreatment = () => {
     }
 
     const handleSubmit = () => {
-      const dateObject = new Date(startDate);
-      dateObject.setHours(startTime);
+      if (drugType === '' || illness === '' || pillName === '' || totalPill === '') {
+        setModalText({
+          heading: 'Verileri Doğru girdiğinize emin olun !',
+          text: 'Hatalı ya da eksin veri girdiniz !',
+        })
+        setModalIsOpen(true);
+      } else {
+        
 
-      prescriptionsRef.add({
-        DrugType: drugType,
-        Illness: illness,
-        MedicationHours: medicationHours,
-        Name: pillName,
-        StartDate: firebase.firestore.Timestamp.fromDate(dateObject),
-        TotalPill: totalPill,
-        UsagePeriod: [],
-        UsagePeriodHour: usagePediodHour
-      }).then((docRef) => {
-        console.log(docRef.id);
-        updateUser(docRef.id);
-      }).catch((error) => {
-        console.error('Belge eklenirken hata oluştu:', error);
-      });
+        const dateObject = new Date(startDate);
+        dateObject.setHours(startTime);
+
+        prescriptionsRef.add({
+          DrugType: drugType,
+          Illness: illness,
+          MedicationHours: medicationHours,
+          Name: pillName,
+          StartDate: firebase.firestore.Timestamp.fromDate(dateObject),
+          TotalPill: totalPill,
+          UsagePeriod: [],
+          UsagePeriodHour: usagePediodHour
+        }).then((docRef) => {
+          updateUser(docRef.id);
+        }).catch((error) => {
+          console.error('Belge eklenirken hata oluştu:', error);
+        });
+      }
+
+
     }
 
     const updateUser = (prescriptionId) => {
@@ -112,6 +124,10 @@ const AddTreatment = () => {
               WaitingTreatmentList: waitingTreatmentList,
               NewTreatment: true,
             }).then(() => {
+              setModalText({
+                heading: 'Tedavi Başarıyla Eklendi !',
+                text: '',
+              })
               setModalIsOpen(true);
             });
 
@@ -137,6 +153,7 @@ const AddTreatment = () => {
     const closeModal = () => {
       setModalIsOpen(false);
       navigate('/patients');
+
     };
 
 
@@ -203,7 +220,8 @@ const AddTreatment = () => {
 
 
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <h2 className='smpd-modal-heading'>Tedavi Başarıyla Eklendi</h2>
+        <h2 className='smpd-modal-heading'>{modalText.heading}</h2>
+        <p>{modalText.text}</p>
         <button className='smpd-modal-button' onClick={closeModal}>Kapat</button>
       </Modal>
     </div>
